@@ -15,7 +15,10 @@ jobs:
     steps:
       - name: 🔄 Checkout Repository
         uses: actions/checkout@v4
-      
+      - name: 🔒 Set Environment Variables
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
       - name: 🔒 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -28,10 +31,7 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-      - name: 🔒 Set Environment Variables
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+      
 
       - name: 📦 Install aws-cdk and all dependencies
         run: |
