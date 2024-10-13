@@ -1,0 +1,56 @@
+name: ▶️ CD pipeline cdk deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - ".github/**"
+
+jobs:
+ deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔒 Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: ⬇️ Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install aws-cdk and all dependencies
+        run: |
+          npm install -g aws-cdk && npm install && cd lambda && npm install
+
+      - name: 📂 Print Working Directory
+        run: pwd && ls  -la
+
+      - name: 🛠️ Build Project
+        run: npm run build
+
+      - name: ⚕️ CDK Doctor
+        run: cdk doctor
+
+      - name: 🥾 CDK Bootstrap
+        timeout-minutes: 15
+        run: cdk bootstrap aws://883183666441/us-east-1 --force
+
+      - name: ✅ CDK Synth Stack
+        run: cdk synth
+
+      - name: 🚀 Deploy CDK Stack
+        id: deploy
+        run: |
+          DEPLOY_OUTPUT=$(cdk deploy --require-approval never)
+          echo "$DEPLOY_OUTPUT"
