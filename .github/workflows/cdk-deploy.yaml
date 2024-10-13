@@ -9,16 +9,13 @@ on:
       - ".github/**"
 
 jobs:
- deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
+    environment: development
     steps:
       - name: 🔄 Checkout Repository
         uses: actions/checkout@v4
-      - name: 🔒 Set Environment Variables
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+
       - name: 🔒 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -31,14 +28,15 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-      
 
       - name: 📦 Install aws-cdk and all dependencies
         run: |
-          npm install -g aws-cdk && npm install && cd lambda && npm install
+          npm install -g aws-cdk
+          npm install
+          cd lambda && npm install
 
       - name: 📂 Print Working Directory
-        run: pwd && ls  -la
+        run: pwd && ls -la
 
       - name: 🛠️ Build Project
         run: npm run build
