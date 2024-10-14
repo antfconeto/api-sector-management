@@ -5,7 +5,7 @@ import { SectorModel } from "./models/sector";
 interface ISectorManager{
     createSector(sector:SectorModel):Promise<SectorModel>;
     updateSector(sector:SectorModel):Promise<SectorModel>;
-    deleteSector(id:string, isSoft:boolean):Promise<Boolean>;
+    deleteSector(id:string, isSoft:boolean):Promise<boolean>;
     deleteSectorSoft(sector:SectorModel):Promise<SectorModel>
     getSectorById(id:string):Promise<SectorModel>
 }
@@ -22,18 +22,23 @@ class SectorManager implements ISectorManager{
 
     async createSector(sector: SectorModel): Promise<SectorModel> {
         this.logger.info(`🔁 Initing creating sector: ${JSON.stringify(sector.id)}`)
+        return new SectorModel()
     }
     async updateSector(sector: SectorModel): Promise<SectorModel> {
         this.logger.info(`🔁 Initing updating sector: ${JSON.stringify(sector.id)}`)
+        return new SectorModel()
     }
-    async deleteSector(id: string, isSoft:booelan): Promise<Boolean> {
+    async deleteSector(id: string, isSoft:boolean): Promise<boolean> {
         this.logger.info(`🔁 Initing deleting sector: ${JSON.stringify(id)}`)
+        return true
     }
     deleteSectorSoft(sector:SectorModel): Promise<SectorModel> {
         this.logger.info(`🔁 Initing deleting soft sector: ${JSON.stringify(sector.id)}`)
+        throw new Error('')
     }
     async getSectorById(id: string): Promise<SectorModel> {
-        this.logger.info(`🔁 Initing creating sector: ${JSON.stringify(sector.id)}`)
+        this.logger.info(`🔁 Initing creating sector: ${JSON.stringify(id)}`)
+        return new SectorModel()
     }
 
 }
