@@ -1,5 +1,5 @@
 import { Logger } from "@aws-lambda-powertools/logger";
-import { SectorModel } from "./models/Sector";
+import { SectorModel } from "./models/sector";
 
 
 interface ISectorManager{
