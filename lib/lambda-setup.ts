@@ -10,7 +10,7 @@ import path = require("path");
 
 export interface LambdasFunctions {
   name: string;
-  function: lambda.Function;
+  lambda: lambda.Function;
 }
 export class LambdaSetup {
   private stack: Stack;
@@ -38,7 +38,7 @@ export class LambdaSetup {
         }
      this.LambdasFunctions.push({
         name:name,
-        function:this.createLambda(name,config)
+        lambda:this.createLambda(name,config)
      })
     })
   }
@@ -75,6 +75,9 @@ export class LambdaSetup {
         ),
       ],
     });
+  }
+  getLambdas():LambdasFunctions[]{
+    return this.LambdasFunctions
   }
   
   private createLambda(name:string,config:any){

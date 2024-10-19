@@ -91,7 +91,7 @@ class SectorModel extends ActiveEntity {
      * @returns A new SectorModel instance.
      * @throws CustomError if the item is invalid.
      */
-    fromItem(item: any) {
+   static fromItem(item: any) {
       logger.info(`🔁 Converting item to SectorModel`);
       if (!item || !item.data) {
         logger.error(`❌ Invalid item received: ${item}`);
@@ -108,7 +108,7 @@ class SectorModel extends ActiveEntity {
      * @returns A new SectorModel instance.
      * @throws CustomError if the input is invalid.
      */
-    fromInput(sectorInput: SectorInput) {
+    static fromInput(sectorInput: SectorInput) {
       logger.info(`🔁 Converting SectorInput to SectorModel`);
       if (!sectorInput) {
         logger.error(`❌ Invalid SectorInput received: ${sectorInput}`);
