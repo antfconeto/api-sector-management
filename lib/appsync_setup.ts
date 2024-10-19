@@ -74,25 +74,25 @@ export class AppsyncSetup {
         stringValue: this.SectorApi.attrGraphQlUrl,
       });
   
-      const apiKeyParameter = new ssm.StringParameter(this.stack, 'SectorApiKey', {
+      const apiKeyParameter = new ssm.StringParameter(this.stack, 'SectorApiKeySSM', {
         parameterName: '/SectorWatch/appsync/SectorApiKey',
         stringValue: apiKey.attrApiKey,
       });
   
       // ---------- Outputs ----------
-      new CfnOutput(this.stack, "SectorApiUrl", {
+      new CfnOutput(this.stack, "SectorApiUrlOutput", {
         value: this.SectorApi.attrGraphQlUrl,
         description: "The URL of the Sector GraphQL API",
         exportName: "SectorApiUrl",
       });
   
-      new CfnOutput(this.stack, "SectorApiKey", {
+      new CfnOutput(this.stack, "SectorApiKeyOutput", {
         value: apiKey.attrApiKey,
         description: "The API Key of the Sector GraphQL API",
         exportName: "SectorApiKey",
       });
   
-      new CfnOutput(this.stack, "SectorApiId", {
+      new CfnOutput(this.stack, "SectorApiIdOutput", {
         value: this.SectorApi.attrApiId,
         description: "The API ID of the Sector GraphQL API",
         exportName: "SectorApiId",
