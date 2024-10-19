@@ -4,7 +4,7 @@ import { CustomError } from "../../utils/feedback-util"; // Assuming CustomError
  // Path to the SectorModel class
 import { ActiveEntity } from "../../models/base"; // Path to ActiveEntity
 import { SectorModel } from "../../models/sector";
-
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 
 
 describe('SectorModel', () => {
@@ -43,7 +43,7 @@ describe('SectorModel', () => {
   });
 
   it('should return a valid item using toItem()', () => {
-    const item = sector.toItem();
+    const item = unmarshall(sector.toItem());
     expect(item.PK).toBe(`SECTOR#12345`);
     expect(item.SK).toBe(`SECTOR#12345`);
     expect(item.data).toEqual({
