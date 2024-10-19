@@ -58,7 +58,7 @@ describe('SectorModel', () => {
   it('should handle invalid item in fromItem()', () => {
     const invalidItem = { data: null };
     try {
-      sector.fromItem(invalidItem);
+      SectorModel.fromItem(invalidItem);
     } catch (error:any) {
       expect(error).toBeInstanceOf(CustomError);
       expect(error.message).toBe("❌ Invalid item received: [object Object]");
@@ -68,7 +68,7 @@ describe('SectorModel', () => {
   it('should handle missing data in fromItem()', () => {
     const invalidItem = {};
     try {
-      sector.fromItem(invalidItem);
+      SectorModel.fromItem(invalidItem);
     } catch (error:any) {
       expect(error).toBeInstanceOf(CustomError);
       expect(error.message).toBe("❌ Invalid item received: [object Object]");
@@ -84,7 +84,7 @@ describe('SectorModel', () => {
       active: false
     };
 
-    const newSector = sector.fromInput(sectorInput);
+    const newSector = SectorModel.fromInput(sectorInput);
     expect(newSector.id).toBe("67890");
     expect(newSector.name).toBe("New Sector");
     expect(newSector.description).toBe("New description");
@@ -95,7 +95,7 @@ describe('SectorModel', () => {
   it('should throw error when invalid input is passed to fromInput()', () => {
     const invalidInput = null;
     try {
-      sector.fromInput(invalidInput as any); // Invalid input type
+      SectorModel.fromInput(invalidInput as any); // Invalid input type
     } catch (error:any) {
       expect(error).toBeInstanceOf(CustomError);
       expect(error.message).toBe("❌ Invalid SectorInput received: null");
@@ -107,14 +107,14 @@ describe('SectorModel', () => {
     
     const invalidItem = { data: null };
     try {
-      sector.fromItem(invalidItem);
+      SectorModel.fromItem(invalidItem);
     } catch (error) {
       expect(loggerErrorSpy).toHaveBeenCalledWith("❌ Invalid item received: [object Object]");
     }
 
     const invalidInput = null;
     try {
-      sector.fromInput(invalidInput as any);
+      SectorModel.fromInput(invalidInput as any);
     } catch (error) {
       expect(loggerErrorSpy).toHaveBeenCalledWith("❌ Invalid SectorInput received: null");
     }

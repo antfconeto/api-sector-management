@@ -1,0 +1,19 @@
+type Sector{
+    name:String,
+    description:String,
+    status:String,
+    active:Boolean,
+    id:String
+}
+
+input SectorInput{
+    name:String,
+    description:String,
+    status:String,
+    active:Boolean,
+    id:String
+}
+
+type Mutation{
+    createSector(sector:SectorInput):Sector
+}
