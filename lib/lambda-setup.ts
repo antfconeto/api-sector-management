@@ -29,7 +29,6 @@ export class LambdaSetup {
             environment:{
                 ENVIRONMENT:'development',
                 SECTOR_TABLE:sectorTable.tableName,
-                AWS_REGION: 'us-east-1'
             },
             functionName:`${name}Function`,
             role:this.addRoleToLambda(name,sectorTable),
