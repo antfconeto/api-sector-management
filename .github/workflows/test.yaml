@@ -1,0 +1,35 @@
+name: Test Application
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - "**"
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⬇️ Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm install && cd lambda && npm install
+
+      - name: 📂 Print Working Directory
+        run: pwd && ls  -la
+
+      - name: 🛠️ Build Project
+        run: npm run build
+
+      - name: 🧪 Run Tests
+        run: npm run test
