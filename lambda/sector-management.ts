@@ -1,5 +1,19 @@
 import { Logger } from "@aws-lambda-powertools/logger";
 import { SectorModel } from "./models/sector";
+import { CustomError } from "./utils/feedback-util";
+import { DynamoDBClient, PutItemCommand, } from "@aws-sdk/client-dynamodb";
+import {DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb'
+
+
+//-------Define DDB client-------
+const ddbClient = new DynamoDBClient({
+    region:process.env.AWS_REGION || 'us-east-1'
+})
+const ddb = DynamoDBDocumentClient.from(ddbClient,{
+    marshallOptions:{
+        removeUndefinedValues:true
+    }
+})
 
 
 interface ISectorManager{
@@ -21,8 +35,25 @@ class SectorManager implements ISectorManager{
     }
 
     async createSector(sector: SectorModel): Promise<SectorModel> {
+        if(!sector){
+            this.logger.error(`❌ Required sector fields is empty: ${JSON.stringify(sector)}`)
+            throw new CustomError(500, `❌ Required sector fields is empty: ${JSON.stringify(sector)}`)
+        }
         this.logger.info(`🔁 Initing creating sector: ${JSON.stringify(sector.id)}`)
-        return new SectorModel()
+        const command = new PutItemCommand({
+            TableName:process.env.SECTOR_TABLE,
+            Item:sector.toItem()
+        })
+        try{
+            this.logger.info(`▶️ Inserting Item Sector in dynamoDB: ${JSON.stringify(command)}`)
+            await ddb.send(command)
+            this.logger.info(`✅ Sector with id: ${sector.id} was created with success!`)
+            return sector
+        }catch(error:any){
+            this.logger.error(`❌ Failed to create sector: ${error.message}`)
+            throw new CustomError(400, `❌ Failed to create sector: ${error.message}`)
+        }
+        
     }
     async updateSector(sector: SectorModel): Promise<SectorModel> {
         this.logger.info(`🔁 Initing updating sector: ${JSON.stringify(sector.id)}`)
@@ -42,3 +73,5 @@ class SectorManager implements ISectorManager{
     }
 
 }
+
+export {SectorManager, ISectorManager}

@@ -2,7 +2,8 @@ import { randomUUID } from "crypto";
 import { ActiveEntity } from "./base";
 import { Logger } from "@aws-lambda-powertools/logger";
 import { CustomError } from "../utils/feedback-util";
-
+import { AttributeValue } from "@aws-sdk/client-dynamodb";
+import {marshall} from "@aws-sdk/util-dynamodb"
 const logger = new Logger({
   logLevel: "debug",
   serviceName: "SectorModel",
@@ -67,9 +68,9 @@ class SectorModel extends ActiveEntity {
      * 
      * @returns An object representing the sector in DynamoDB item format.
      */
-    toItem(): Record<string, unknown> {
+    toItem(): Record<string, AttributeValue> {
       logger.info(`🔁 Converting SectorModel to item`);
-      return {
+      return marshall({
         PK: this.pk,
         SK: this.sk,
         data: {
@@ -80,7 +81,7 @@ class SectorModel extends ActiveEntity {
           active: this.active,
         },
         entity: this.entity
-      };
+      });
     }
   
     /**
