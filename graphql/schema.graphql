@@ -14,6 +14,9 @@ input SectorInput{
     id:String
 }
 
-type Mutation{
-    createSector(sector:SectorInput):Sector
+type Mutation {
+    createSector(sector:SectorInput!):Sector
+}
+type Query {
+    _empty: String
 }
