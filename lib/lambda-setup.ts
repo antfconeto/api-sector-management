@@ -36,7 +36,7 @@ export class LambdaSetup {
             functionName:`${name}Function`,
             role:this.addRoleToLambda(name,sectorTable),
             timeout:Duration.minutes(3),
-            code: lambda.Code.fromAsset(path.join(__dirname, "../lambda")),
+            code: lambda.Code.fromAsset(path.join(__dirname, "../app")),
         }
      this.LambdasFunctions.push({
         name:name,
