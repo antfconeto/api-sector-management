@@ -5,9 +5,9 @@ import {
   aws_iam as iam,
   CfnOutput,
 } from "aws-cdk-lib";
-import { LambdasFunctions } from "./lambda-setup";
+import { LambdasFunctions } from "../types/types";
 import { CloudWatchLogGroup } from "aws-cdk-lib/aws-events-targets";
-import path = require("path");
+import path from 'path'
 import * as fs from 'fs'
 export class AppsyncSetup {
   private stack: Stack;

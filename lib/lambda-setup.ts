@@ -6,12 +6,10 @@ import {
   aws_dynamodb as dynamodb,
   Duration,
 } from "aws-cdk-lib";
-import path = require("path");
+import path from 'path'
+import { LambdasFunctions } from "../types/types";
 
-export interface LambdasFunctions {
-  name: string;
-  lambda: lambda.Function;
-}
+
 export class LambdaSetup {
   private stack: Stack;
   private LambdasFunctions:LambdasFunctions[]
@@ -21,10 +19,15 @@ export class LambdaSetup {
   }
 
   public setupLambdas(sectorTable: dynamodb.Table) {
-    const lambdaNames = ["createSector"];
+    const lambdaNames = [
+      "createSector",
+      "updateSector",
+      "deleteSector",
+      "getSectorById"
+    ];
     lambdaNames.forEach((name)=>{
         let config = {
-            handler:'index.handler',
+            handler:'/app/index.handler',
             runtime:lambda.Runtime.NODEJS_20_X,
             environment:{
                 ENVIRONMENT:'development',
@@ -75,10 +78,9 @@ export class LambdaSetup {
       ],
     });
   }
-  getLambdas():LambdasFunctions[]{
+  public getLambdas():LambdasFunctions[]{
     return this.LambdasFunctions
   }
-  
   private createLambda(name:string,config:any){
     return new lambda.Function(this.stack,`${name}Function`,config)
   }

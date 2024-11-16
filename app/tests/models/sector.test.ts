@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { Logger } from "@aws-lambda-powertools/logger";
-import { CustomError } from "../../utils/feedback-util"; // Assuming CustomError is in the same directory
+import { CustomError } from "../../utils/feedback-util"
  // Path to the SectorModel class
 import { ActiveEntity } from "../../models/base"; // Path to ActiveEntity
 import { SectorModel } from "../../models/sector";
