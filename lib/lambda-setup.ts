@@ -6,7 +6,7 @@ import {
   aws_dynamodb as dynamodb,
   Duration,
 } from "aws-cdk-lib";
-import path from 'path'
+import * as path from 'path'
 import { LambdasFunctions } from "../types/types";
 
 

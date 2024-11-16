@@ -7,7 +7,7 @@ import {
 } from "aws-cdk-lib";
 import { LambdasFunctions } from "../types/types";
 import { CloudWatchLogGroup } from "aws-cdk-lib/aws-events-targets";
-import path from 'path'
+import * as path from 'path'
 import * as fs from 'fs'
 export class AppsyncSetup {
   private stack: Stack;
