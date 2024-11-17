@@ -1,14 +1,138 @@
-# Welcome to your CDK TypeScript project
+```
+# Sector Management API
 
-This is a blank project for CDK development with TypeScript.
+A serverless GraphQL API built with AWS AppSync for managing sectors within the organization.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## 🛠 Technologies
 
-## Useful commands
+- AWS CDK (TypeScript)
+- AWS AppSync
+- AWS Lambda
+- GraphQL
+- IAM
+- CloudWatch
+- SSM Parameter Store
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## 🏗 Architecture
+
+The project implements a serverless architecture using:
+- AppSync for GraphQL API management
+- Lambda functions as resolvers
+- IAM roles for security
+- CloudWatch for logging
+- SSM for storing API credentials
+
+## 📁 Project Structure
+
+```
+.
+├── lib/                    # CDK infrastructure code
+├── graphql/               # GraphQL schema definitions
+├── functions/            # Lambda function implementations
+├── test/                 # Test files
+├── cdk.json             # CDK configuration
+└── .github/             # GitHub Actions workflows
+```
+
+## 🔑 Features
+
+### Sector Management
+- Create sectors
+- Update sector information
+- Delete sectors
+- Retrieve sector by ID
+- Sector properties include:
+  - Name
+  - Description
+  - Status
+  - Active state
+  - ID
+
+### API Security
+- API Key authentication
+- IAM role-based access control
+- Secure credential management via SSM
+
+### Monitoring & Logging
+- ALL level field logging enabled
+- CloudWatch integration
+- Complete request/response tracking
+
+## 🚀 CI/CD
+
+Automated deployment pipeline using GitHub Actions:
+- Triggers on:
+  - Push to master branch
+  - Manual workflow dispatch
+- Environment: development
+- Platform: Ubuntu latest
+
+## 🔧 Infrastructure as Code
+
+The entire infrastructure is defined using AWS CDK in TypeScript, including:
+- AppSync API configuration
+- GraphQL schema deployment
+- Lambda function setup
+- IAM role management
+- CloudWatch logging configuration
+- SSM parameter creation
+
+## 📝 API Schema
+
+```graphql
+type Sector {
+    name: String
+    description: String
+    status: String
+    active: Boolean
+    id: String
+}
+
+type Mutation {
+    createSector(sector: SectorInput!): Sector
+    updateSector(sector: SectorInput!): Sector
+    deleteSector(sectorId: String!): Boolean
+}
+
+type Query {
+    getSectorById(sectorId: String!): Sector
+}
+```
+
+## 🔒 Security
+
+- API Key authentication for all operations
+- IAM roles with least privilege principle
+- Secure storage of API credentials in SSM
+- Request/response validation
+
+## 📊 Monitoring
+
+- Field-level logging
+- CloudWatch integration
+- API metrics tracking
+- Error monitoring
+
+## 🚀 Deployment
+
+The infrastructure is deployed using AWS CDK with automatic deployments via GitHub Actions pipeline.
+
+## 🛡 Prerequisites
+
+- AWS Account
+- GitHub repository access
+- AWS CDK CLI
+- Node.js
+- TypeScript
+
+## ⚙️ Environment Setup
+
+1. Configure AWS credentials
+2. Install dependencies
+3. Deploy using CDK
+4. Store API credentials in SSM
+
+## 📫 Contact
+
+For internal support and questions, please contact the development team.
+```
