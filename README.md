@@ -1,4 +1,4 @@
-```
+
 # Sector Management API
 
 A serverless GraphQL API built with AWS AppSync for managing sectors within the organization.
@@ -136,3 +136,4 @@ The infrastructure is deployed using AWS CDK with automatic deployments via GitH
 
 For internal support and questions, please contact the development team.
 ```
+Email: antfcone@gmail.com
