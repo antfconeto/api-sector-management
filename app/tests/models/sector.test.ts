@@ -43,7 +43,7 @@ describe('SectorModel', () => {
   });
 
   it('should return a valid item using toItem()', () => {
-    const item = unmarshall(sector.toItem());
+    const item = sector.toItem();
     expect(item.PK).toBe(`SECTOR#12345`);
     expect(item.SK).toBe(`SECTOR#12345`);
     expect(item.data).toEqual({
