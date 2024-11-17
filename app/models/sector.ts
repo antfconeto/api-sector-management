@@ -68,9 +68,9 @@ class SectorModel extends ActiveEntity {
      * 
      * @returns An object representing the sector in DynamoDB item format.
      */
-    toItem(): Record<string, AttributeValue> {
+    toItem(): Record<string, unknown> {
       logger.info(`🔁 Converting SectorModel to item`);
-      return marshall({
+      return {
         PK: this.pk,
         SK: this.sk,
         data: {
@@ -81,7 +81,7 @@ class SectorModel extends ActiveEntity {
           active: this.active,
         },
         entity: this.entity
-      });
+      };
     }
   
     /**
