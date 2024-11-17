@@ -63,7 +63,7 @@ class SectorDao implements ISectorDao{
             Key:sector.keys(),
             UpdateExpression:"SET #data = :data",
             ExpressionAttributeNames:{
-                ":data": "data"
+                "#data": "data"
             },
             ExpressionAttributeValues:{
                 ":data": sector.data
