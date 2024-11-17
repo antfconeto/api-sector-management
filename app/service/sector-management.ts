@@ -68,7 +68,7 @@ class SectorManagement implements ISectorManagement{
         }
         try{
             if(isSoft){
-               await this.deleteSectorSoft(sectorId)
+               return await this.deleteSectorSoft(sectorId)
             }
             const result = this.sectorDao.deleteSector(sectorId)
             return result
