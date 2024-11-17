@@ -17,7 +17,7 @@ input SectorInput{
 type Mutation {
     createSector(sector:SectorInput!):Sector @aws_api_key
     updateSector(sector:SectorInput!):Sector @aws_api_key
-    deleteSector(sectorId:String!):Boolean @aws_api_key
+    deleteSector(sectorId:String!, isSoft:Boolean!):Boolean @aws_api_key
 
 }
 type Query {

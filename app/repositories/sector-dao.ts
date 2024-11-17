@@ -122,7 +122,7 @@ class SectorDao implements ISectorDao{
                 this.logger.info(`⚠️ User Not found in DynamoDB`)
                 return undefined
             }
-            this.logger.info(`Getted sector: ${JSON.stringify(result.Item)}`)
+            this.logger.info(`🔍 Getted sector: ${JSON.stringify(result.Item)}`)
             this.logger.info(`✅ Sector with id: ${sectorId} was getted with success!`)
             return SectorModel.fromItem(result.Item)
         }catch(error:any){
