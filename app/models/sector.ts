@@ -62,26 +62,30 @@ class SectorModel extends ActiveEntity {
     get sk() {
       return `${this.entity}#${this.id}`;
     }
+    
+    get data(){
+      return {
+        id: this.id,
+        status: this.status,
+        description: this.description,
+        name: this.name,
+        active: this.active,
+      }
+    }
   
     /**
      * Converts the SectorModel instance to a DynamoDB item format.
      * 
      * @returns An object representing the sector in DynamoDB item format.
      */
-    toItem(): Record<string, AttributeValue> {
+    toItem(): Record<string, unknown> {
       logger.info(`🔁 Converting SectorModel to item`);
-      return marshall({
+      return {
         PK: this.pk,
         SK: this.sk,
-        data: {
-          id: this.id,
-          status: this.status,
-          description: this.description,
-          name: this.name,
-          active: this.active,
-        },
+        data: this.data,
         entity: this.entity
-      });
+      };
     }
   
     /**

@@ -33,7 +33,7 @@ jobs:
         run: |
           npm install -g aws-cdk
           npm install
-          cd lambda && npm install
+          cd app && npm install
 
       - name: 📂 Print Working Directory
         run: pwd && ls -la

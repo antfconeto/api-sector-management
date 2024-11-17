@@ -23,7 +23,7 @@ jobs:
           cache: "npm"
 
       - name: 📦 Install Dependencies
-        run: npm install && cd lambda && npm install
+        run: npm install && cd app && npm install
 
       - name: 📂 Print Working Directory
         run: pwd && ls  -la

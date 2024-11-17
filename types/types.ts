@@ -1,14 +1,7 @@
-interface Sector{
-    name:string,
-    description:string,
-    status:string,
-    active:boolean,
-    id:string
-}
-interface SectorInput{
-    name:string,
-    description:string,
-    status:string,
-    active:boolean,
-    id:string
-}
+import {
+    aws_lambda as lambda,
+  } from "aws-cdk-lib";
+export interface LambdasFunctions {
+    name: string;
+    lambda: lambda.Function;
+  }

@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { Logger } from "@aws-lambda-powertools/logger";
-import { CustomError } from "../../utils/feedback-util"; // Assuming CustomError is in the same directory
+import { CustomError } from "../../utils/feedback-util"
  // Path to the SectorModel class
 import { ActiveEntity } from "../../models/base"; // Path to ActiveEntity
 import { SectorModel } from "../../models/sector";
@@ -43,7 +43,7 @@ describe('SectorModel', () => {
   });
 
   it('should return a valid item using toItem()', () => {
-    const item = unmarshall(sector.toItem());
+    const item = sector.toItem();
     expect(item.PK).toBe(`SECTOR#12345`);
     expect(item.SK).toBe(`SECTOR#12345`);
     expect(item.data).toEqual({
